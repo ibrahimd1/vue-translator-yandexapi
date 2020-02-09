@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3 class="text-success text-center"></h3>
     <div class="well">
       <h3>Arama Geçmişi</h3>
       <ul class="list-group text-left">

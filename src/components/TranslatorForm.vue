@@ -12,7 +12,7 @@
     </select>
     <br />
     <div class="text-left">
-      <strong>Tespit Edilen Dil :</strong>
+      <strong>Tespit Edilen Dil : {{detectedLang}}</strong>
     </div>
     <br />
     <button type="submit" class="btn btn-primary btn-block">Çevir Gelsin!</button>
@@ -27,18 +27,13 @@ export default {
     return {
       translateText: "",
       translateTo: "",
-      languages: {}
+      languages: {},
+      detectedLang: ""
     };
   },
   methods: {
     translateIt() {
-      const link =
-        "/translate?key=" +
-        CONST.APIKEY +
-        "&text=" +
-        this.translateText +
-        "&lang='en'";
-      console.log(link);
+      this.detectedLang = this.languages[this.translateTo];
       httpAxios
         .post(
           "/translate?key=" +
@@ -49,7 +44,8 @@ export default {
             this.translateTo
         )
         .then(response => {
-          console.log(response);
+          console.log(response.data.text[0]);
+          this.$emit("translatedEvent", response.data.text[0]);
         })
         .catch(e => console.log(e));
     }

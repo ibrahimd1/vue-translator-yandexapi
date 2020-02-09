@@ -3,7 +3,8 @@
     <app-header></app-header>
     <div class="row">
       <div class="col-md-12 text-center">
-        <app-translator-form></app-translator-form>
+        <app-translator-form @translatedEvent="translatedText=$event"></app-translator-form>
+        <h3 class="text-success text-center">{{translatedText}}</h3>
         <app-search-history-form></app-search-history-form>
       </div>
     </div>
@@ -20,6 +21,11 @@ export default {
     appHeader: Header,
     appTranslatorForm: TranslatorForm,
     appSearchHistoryForm: SearchHistoryForm
+  },
+  data() {
+    return {
+      translatedText: ""
+    };
   }
 };
 </script>
