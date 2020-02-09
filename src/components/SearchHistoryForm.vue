@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="well">
+    <div class="well" v-if="history.length>0">
       <h3>Arama Geçmişi</h3>
       <ul class="list-group text-left">
-        <li class="list-group-item" v-for="item in history" :key="item.from">
+        <li class="list-group-item" v-for="item in history" :key="item.translateText">
           <div>
             <strong>{{item.from}} => {{item.to}}</strong>
           </div>
           <br />
           <div>
-            <strong class="text-success"></strong>
-            <span class="text-info"></span>
+            <strong class="text-success">{{item.translateText}} :</strong>
+            <span class="text-info">{{item.translatedText}}</span>
           </div>
         </li>
       </ul>
@@ -25,4 +25,7 @@ export default {
 </script>
 
 <style>
+.list-group-item {
+  margin-bottom: 5px;
+}
 </style>

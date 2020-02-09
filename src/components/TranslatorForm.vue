@@ -11,7 +11,7 @@
       <option v-for="(value,key) in languages" :key="key" :value="key">{{value}}</option>
     </select>
     <br />
-    <div class="text-left">
+    <div class="text-left" v-if="detectedLang">
       <strong>Tespit Edilen Dil :</strong>
       {{detectedLang}}
     </div>
@@ -48,13 +48,17 @@ export default {
           this.$emit("translatedEvent", response.data.text[0]);
 
           let history = {
-            from: response.data.lang.split("-")[0],
+            from: this.languages[response.data.lang.split("-")[0]],
             to: this.detectedLang,
             translateText: this.translateText,
             translatedText: response.data.text[0]
           };
 
           this.$emit("historyEvent", history);
+
+          this.translateText = "";
+          this.translateTo = "";
+          this.detectedLang = "";
         })
         .catch(e => console.log(e));
     }
