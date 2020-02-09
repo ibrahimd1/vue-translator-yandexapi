@@ -3,9 +3,12 @@
     <app-header></app-header>
     <div class="row">
       <div class="col-md-12 text-center">
-        <app-translator-form @translatedEvent="translatedText=$event"></app-translator-form>
+        <app-translator-form
+          @translatedEvent="translatedText=$event"
+          @historyEvent="history.push($event)"
+        ></app-translator-form>
         <h3 class="text-success text-center">{{translatedText}}</h3>
-        <app-search-history-form></app-search-history-form>
+        <app-search-history-form :history="history"></app-search-history-form>
       </div>
     </div>
   </div>
@@ -24,7 +27,8 @@ export default {
   },
   data() {
     return {
-      translatedText: ""
+      translatedText: "",
+      history: []
     };
   }
 };

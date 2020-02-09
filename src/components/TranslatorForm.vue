@@ -12,7 +12,8 @@
     </select>
     <br />
     <div class="text-left">
-      <strong>Tespit Edilen Dil : {{detectedLang}}</strong>
+      <strong>Tespit Edilen Dil :</strong>
+      {{detectedLang}}
     </div>
     <br />
     <button type="submit" class="btn btn-primary btn-block">Çevir Gelsin!</button>
@@ -44,8 +45,16 @@ export default {
             this.translateTo
         )
         .then(response => {
-          console.log(response.data.text[0]);
           this.$emit("translatedEvent", response.data.text[0]);
+
+          let history = {
+            from: response.data.lang.split("-")[0],
+            to: this.detectedLang,
+            translateText: this.translateText,
+            translatedText: response.data.text[0]
+          };
+
+          this.$emit("historyEvent", history);
         })
         .catch(e => console.log(e));
     }

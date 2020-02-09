@@ -3,9 +3,9 @@
     <div class="well">
       <h3>Arama Geçmişi</h3>
       <ul class="list-group text-left">
-        <li class="list-group-item">
+        <li class="list-group-item" v-for="item in history" :key="item.from">
           <div>
-            <strong></strong>
+            <strong>{{item.from}} => {{item.to}}</strong>
           </div>
           <br />
           <div>
@@ -19,7 +19,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["history"]
+};
 </script>
 
 <style>
